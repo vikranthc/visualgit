@@ -24,6 +24,7 @@ namespace VisualGit
         public MainWindow()
         {
             InitializeComponent();
+            this.Style = (Style)Resources["GlassStyle"];
         }
 
         private void LoadGitLog_Click(object sender, RoutedEventArgs e)
