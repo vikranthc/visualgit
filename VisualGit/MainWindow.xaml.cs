@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using LibGit2Sharp;
 
 namespace VisualGit
 {
@@ -24,5 +25,28 @@ namespace VisualGit
         {
             InitializeComponent();
         }
+
+        private void LoadGitLog_Click(object sender, RoutedEventArgs e)
+        {
+            Repository repo = new Repository("C:/Repos/Conservice");
+            Branch master = repo.Branches.ElementAt(0);
+
+            foreach (var commit in master.Commits)
+            {
+                Commit c = new Commit();
+                c.Hash = commit.Id.ToString();
+                c.Author = commit.Author.ToString();
+                c.Message = commit.Message;
+
+                History.Items.Add(c);
+            }
+        }
+    }
+
+    public struct Commit
+    {
+        public String Hash { get; set; }
+        public String Author { get; set; }
+        public String Message { get; set; }
     }
 }
